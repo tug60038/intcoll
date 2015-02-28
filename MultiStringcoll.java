@@ -42,6 +42,7 @@ public class MultiStringcoll {
         if (t != null) {
             root = new btNode();
             root.info = t.info;
+            root.count = t.count;
             root.left = copytree(t.left);
             root.right = copytree(t.right);
         }
