@@ -6,7 +6,7 @@
 import java.util.*;
 
 public class Stringcoll {
-	private btNode c;
+    private btNode c;
     private int howmany;
 
     // Creates an empty collection of integers with a capactity of 500
