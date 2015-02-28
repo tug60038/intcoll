@@ -88,56 +88,54 @@ public class Stringcoll {
     // Removes number if it is in collection
     //
     // @param   i    integer to be removed, i > 0
-    public void omit(int i) {
-        if (i > 0) {
-            btNode p = c, pred = null;
-            while ((p != null) && (p.info != i)) {
-                pred = p;
-                if (p.info > i) p = p.left;
-                else p = p.right;
-            }
-            if (p != null) {
-                if (pred == null) {
-                    if (p.left != null) {
-                        btNode last = p;
-                        pred = p.left;
-                        p = p.left.right;
-                        while (p != null) {
+    public void omit(String i) {
+        btNode p = c, pred = null;
+        while ((p != null) && !(p.info.equals(i))) {
+            pred = p;
+            if (p.info.compareTo(i) > 0) p = p.left;
+            else p = p.right;
+        }
+        if (p != null) {
+            if (pred == null) {
+                if (p.left != null) {
+                    btNode last = p;
+                    pred = p.left;
+                    p = p.left.right;
+                    while (p != null) {
+                        last = pred;
+                        pred = p;
+                        p = p.right;
+                    } 
+                    c.info = pred.info;
+                    if (last == c) c.left = pred.left;
+                    else last.right = pred.left;
+                } else {
+                    c = c.right;
+                }
+            } else {
+                if (p.left != null) {
+                    if(p.right != null) {
+                        btNode d = p, last = p;
+                        pred = d.left;
+                        d = d.left.right;
+                        while (d != null) {
                             last = pred;
-                            pred = p;
-                            p = p.right;
-                        } 
-                        c.info = pred.info;
-                        if (last == c) c.left = pred.left;
+                            pred = d;
+                            d = d.right;
+                        }
+                        p.info = pred.info;
+                        if (last == p) last.left = pred.left;
                         else last.right = pred.left;
                     } else {
-                        c = c.right;
+                        if (pred.info.compareTo(p.info) > 0) pred.left = p.left;
+                        else pred.right = p.left;
                     }
                 } else {
-                    if (p.left != null) {
-                        if(p.right != null) {
-                            btNode d = p, last = p;
-                            pred = d.left;
-                            d = d.left.right;
-                            while (d != null) {
-                                last = pred;
-                                pred = d;
-                                d = d.right;
-                            }
-                            p.info = pred.info;
-                            if (last == p) last.left = pred.left;
-                            else last.right = pred.left;
-                        } else {
-                            if (pred.info > p.info) pred.left = p.left;
-                            else pred.right = p.left;
-                        }
-                    } else {
-                        if (pred.info > p.info) pred.left = p.right;
-                        else pred.right = p.right;
-                    }
+                    if (pred.info.compareTo(p.info) > 0) pred.left = p.right;
+                    else pred.right = p.right;
                 }
-                howmany--;
             }
+            howmany--;
         }
     }
     
@@ -175,7 +173,7 @@ public class Stringcoll {
 
             j = 0;
             while ((result) && (j < howmany)) {
-                result = (a[j] == b[j]); j++;
+                result = (a[j].equals(b[j])); j++;
             }
         }
         return result;
