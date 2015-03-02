@@ -8,15 +8,14 @@ import java.util.*;
 public class MultiStringcoll {
     private btNode c;
     private int howmany;
-    private int total;
 
-    // Creates an empty collection of integers with a capactity of 500
+    // Creates an empty collection of Strings with a capactity of 500
     public MultiStringcoll() {
         c = null;
         howmany = 0;
     }
 
-    // Creates an empty collection of integers with a capactity of i
+    // Creates an empty collection of Strings with a capactity of i
     //
     // @param   i   capacity of collection, i >= 0
     public MultiStringcoll(int i) {
@@ -49,9 +48,9 @@ public class MultiStringcoll {
         return root;
     }
 
-    // Returns true if integer of choice is in collection, otherwise returns false
+    // Returns true if String of choice is in collection, otherwise returns false
     // 
-    // @param   i    integer to be determined whether or not it is in collection
+    // @param   i    String to be determined whether or not it is in collection
     // @return       indicates if i is in collection
     public boolean belongs(String i) {
         btNode p = c;
@@ -65,20 +64,22 @@ public class MultiStringcoll {
         return (p != null);
     }    
 
-    // Adds an integer to collection. If capacity is exceeded, the capacity will
+    // Adds a String to collection. If capacity is exceeded, the capacity will
     // double in size.
     //
-    // @param   i    integer to be added, i > 0
+    // @param   i    String to be added, i > 0
     public void insert(String i) {
         btNode pred = null, p = c;
-
+        howmany++;
         while ((p != null) && !(p.info.equals(i))) {
             pred = p;
             if (p.info.compareTo(i) > 0) p = p.left;
             else p = p.right;
         }
-        if (p == null) {
-            howmany++;
+        if (p != null) {
+            p.count++;
+        }
+        else {
             p = new btNode(i, null, null);
             if (pred != null) {
                 if (pred.info.compareTo(i) > 0) pred.left = p;
@@ -87,9 +88,9 @@ public class MultiStringcoll {
         }
     }
 
-    // Removes number if it is in collection
+    // Removes String if it is in collection
     //
-    // @param   i    integer to be removed, i > 0
+    // @param   i    String to be removed, i > 0
     public void omit(String i) {
         btNode p = c, pred = null;
         while ((p != null) && !(p.info.equals(i))) {
@@ -98,50 +99,53 @@ public class MultiStringcoll {
             else p = p.right;
         }
         if (p != null) {
-            if (pred == null) {
-                if (p.left != null) {
-                    btNode last = p;
-                    pred = p.left;
-                    p = p.left.right;
-                    while (p != null) {
-                        last = pred;
-                        pred = p;
-                        p = p.right;
-                    } 
-                    c.info = pred.info;
-                    if (last == c) c.left = pred.left;
-                    else last.right = pred.left;
-                } else {
-                    c = c.right;
-                }
-            } else {
-                if (p.left != null) {
-                    if(p.right != null) {
-                        btNode d = p, last = p;
-                        pred = d.left;
-                        d = d.left.right;
-                        while (d != null) {
+            if (p.count > 1) p.count--;
+            else {
+                if (pred == null) {
+                    if (p.left != null) {
+                        btNode last = p;
+                        pred = p.left;
+                        p = p.left.right;
+                        while (p != null) {
                             last = pred;
-                            pred = d;
-                            d = d.right;
-                        }
-                        p.info = pred.info;
-                        if (last == p) last.left = pred.left;
+                            pred = p;
+                            p = p.right;
+                        } 
+                        c.info = pred.info;
+                        if (last == c) c.left = pred.left;
                         else last.right = pred.left;
                     } else {
-                        if (pred.info.compareTo(p.info) > 0) pred.left = p.left;
-                        else pred.right = p.left;
+                        c = c.right;
                     }
                 } else {
-                    if (pred.info.compareTo(p.info) > 0) pred.left = p.right;
-                    else pred.right = p.right;
+                    if (p.left != null) {
+                        if(p.right != null) {
+                            btNode d = p, last = p;
+                            pred = d.left;
+                            d = d.left.right;
+                            while (d != null) {
+                                last = pred;
+                                pred = d;
+                                d = d.right;
+                            }
+                            p.info = pred.info;
+                            if (last == p) last.left = pred.left;
+                            else last.right = pred.left;
+                        } else {
+                            if (pred.info.compareTo(p.info) > 0) pred.left = p.left;
+                            else pred.right = p.left;
+                        }
+                    } else {
+                        if (pred.info.compareTo(p.info) > 0) pred.left = p.right;
+                        else pred.right = p.right;
+                    }
                 }
             }
             howmany--;
         }
     }
     
-    // returns the number of integers stored in collection
+    // returns the number of distinct Strings stored in collection
     public int get_howmany() {
         return howmany;
     }
@@ -160,7 +164,7 @@ public class MultiStringcoll {
         }
     }
     
-    // returns true if collection contains every integer from the collection
+    // returns true if collection contains every String from the collection
     // of obj, and conversely.
     //
     // @param   obj  reference to a collection
@@ -170,8 +174,8 @@ public class MultiStringcoll {
         if (result) {
             String[] a = new String[howmany];
             String[] b = new String[howmany];
-            Int[] e = new Int[howmany]; // stores the amount of occurances for each string. corresponds to array a
-            Int[] f = new Int[howmany]; // ditto, but for array b
+            int[] e = new int[howmany]; // stores the amount of occurances for each string. corresponds to array a
+            int[] f = new int[howmany]; // ditto, but for array b
             toarray(c, a, 0);
             toarray(obj.c, b, 0);
             toarray2(c, e, 0);
@@ -179,7 +183,7 @@ public class MultiStringcoll {
 
             j = 0;
             while ((result) && (j < howmany)) {
-                result = ((a[j].equals(b[j])) && e[j] == f[i]); j++;
+                result = ((a[j].equals(b[j])) && e[j] == f[j]); j++;
             }
         }
         return result;
@@ -207,6 +211,19 @@ public class MultiStringcoll {
         return num_nodes;
     }
 
+    // returns total number of Strings in collection.
+    public int get_total() {;
+        return (total(c));
+    }
+
+    // An extension of the get_total method
+    private static int total(btNode t) {
+        if (t != null) {
+            return (t.count + total(t.left) + total(t.right));
+        }
+        return 0;
+    }
+
     // This is an inner class for a binary tree
     private static class btNode {
         private String info;
@@ -216,8 +233,8 @@ public class MultiStringcoll {
 
         private btNode(String s, btNode lt, btNode rt) {
             info = s; left = lt; right = rt;
-            if (s == null) count = 0;
-            else count = 1;
+            if (s != null) count = 1;
+            else count = 0;
         }
 
         private btNode() {
