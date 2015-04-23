@@ -51,15 +51,12 @@ public class Intcoll4 {
     // @param   i    integer to be determined whether or not it is in collection
     // @return       indicates if i is in collection
     public boolean belongs(int i) {
-        boolean result = false;
+        ListNode p = c;
         if (i > 0) {
-            ListNode p = c;
-            while ((p != null) && (p.info != i))
+            while ((p != null) && (p.info != i)) 
                 p = p.link;
-            if (p != null)
-                result = true;
         }
-        return result;
+        return (p != null);
     }
 
     // Adds an integer to collection. If capacity is exceeded, the capacity will
