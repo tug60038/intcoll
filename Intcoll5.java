@@ -4,7 +4,7 @@
  * Joseph Norkin 
  * Intcoll5.java
  * 
- * This file contains a class that impliments a collection of positive integers.
+ * This file contains a class that implements a collection of positive integers.
  */
 
 import java.util.*;

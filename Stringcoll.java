@@ -4,7 +4,7 @@
  * Joseph Norkin 
  * Stringcoll.java
  * 
- * This file contains a class that impliments a collection of strings.
+ * This file contains a class that implements a collection of strings.
  */
 
 import java.util.*;
