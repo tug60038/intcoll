@@ -1,7 +1,11 @@
-//*********************************************************************
-// FILE NAME    : Intcoll2.java
-// DESCRIPTION  : This file contains the class Intcoll2.
-//*********************************************************************
+/* CIS 2168
+ * Prof. James Korsh
+ *
+ * Joseph Norkin 
+ * Intcoll2.java
+ * 
+ * This file contains a class that impliments a collection of positive integers.
+ */
 
 public class Intcoll2 {
     private int[] c;

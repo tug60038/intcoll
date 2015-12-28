@@ -1,7 +1,11 @@
-//*********************************************************************
-// FILE NAME    : Intcoll6.java
-// DESCRIPTION  : This file contains the class Intcoll6.
-//*********************************************************************
+/* CIS 2168
+ * Prof. James Korsh
+ *
+ * Joseph Norkin 
+ * Intcoll6.java
+ * 
+ * This file contains a class that impliments a collection of positive integers.
+ */
 
 import java.util.*;
 

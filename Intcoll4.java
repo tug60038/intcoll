@@ -1,7 +1,11 @@
-//*********************************************************************
-// FILE NAME    : Intcoll4.java
-// DESCRIPTION  : This file contains the class Intcoll4.
-//*********************************************************************
+/* CIS 2168
+ * Prof. James Korsh
+ *
+ * Joseph Norkin 
+ * Intcoll4.java
+ * 
+ * This file contains a class that impliments a collection of positive integers.
+ */
 
 public class Intcoll4 {
     private ListNode c;

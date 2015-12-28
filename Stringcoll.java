@@ -1,7 +1,11 @@
-//*********************************************************************
-// FILE NAME    : Stringcoll.java
-// DESCRIPTION  : This file contains the class Stringcoll.
-//*********************************************************************
+/* CIS 2168
+ * Prof. James Korsh
+ *
+ * Joseph Norkin 
+ * Stringcoll.java
+ * 
+ * This file contains a class that impliments a collection of strings.
+ */
 
 import java.util.*;
 

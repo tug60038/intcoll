@@ -1,7 +1,11 @@
-//*********************************************************************
-// FILE NAME    : Intcoll3.java
-// DESCRIPTION  : This file contains the class Intcoll3.
-//*********************************************************************
+/* CIS 2168
+ * Prof. James Korsh
+ *
+ * Joseph Norkin 
+ * Intcoll3.java
+ * 
+ * This file contains a class that impliments a collection of positive integers.
+ */
 
 public class Intcoll3 {
     private boolean[] c;
